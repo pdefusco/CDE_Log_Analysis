@@ -14,9 +14,9 @@ import json
 # Create a Connection to CDE and set Token #
 ############################################
 
-JOBS_API_URL = "https://<YOUR-CLUSTER>.cloudera.site/dex/api/v1"
-WORKLOAD_USER = "<Your-CDP-Workload-User>"
-WORKLOAD_PASSWORD = "<Your-CDP-Workload-Password>"
+JOBS_API_URL = os.environ['JOBS_API_URL']
+WORKLOAD_USER = os.environ['PROJECT_OWNER']
+WORKLOAD_PASSWORD = os.environ['WORKLOAD_PWD']
 
 myCdeConnection = cdeconnection.CdeConnection(JOBS_API_URL, WORKLOAD_USER, WORKLOAD_PASSWORD)
 
@@ -80,7 +80,7 @@ json.loads(jobRuns)
 ### DOWNLOAD LOGS ###
 #####################
 
-JOB_RUN_ID = "1"
+JOB_RUN_ID = "18421"
 logTypes = myCdeClusterManager.showAvailableLogTypes(JOB_RUN_ID)
 json.loads(logTypes)
 
@@ -90,3 +90,18 @@ sparkEventLogs = myCdeClusterManager.downloadJobRunLogs(JOB_RUN_ID, LOGS_TYPE)
 sparkEventLogsClean = sparkEventLogParser(sparkEventLogs)
 
 print(sparkEventLogsClean)
+
+#####################
+### SAVE LOGS     ###
+#####################
+
+for jobId in range(18400,18520):
+  
+  LOGS_TYPE = "driver/event"
+  sparkEventLogs = myCdeClusterManager.downloadJobRunLogs(str(jobId), LOGS_TYPE)
+  sparkEventLogsClean = sparkEventLogParser(sparkEventLogs)
+  
+  with open("sparklogs/spark_logs_{}.txt".format(jobId), "w") as text_file:
+      text_file.write(sparkEventLogsClean)
+
+
