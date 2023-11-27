@@ -8,12 +8,12 @@ def extractPhysicalPlan(log):
   # Using regex
   res = re.findall(r'\{.*?\}', text)
 
-  plans = []  
+  plans = []
   for i in res:
     if "physicalPlanDescription" in i:
       print(i)
       plans.append(i)
-      
+
   print(plans)
 
   sub1 = '"physicalPlanDescription":'
@@ -44,7 +44,7 @@ df = pd.DataFrame(texts, columns = ['fname', 'text'])
 
 # Set the text column to be the raw text with the newlines removed
 #df['text'] = df.fname
-df.to_csv('logs.csv')
+df.to_csv('data/logs.csv')
 df.head()
 
 
@@ -53,7 +53,7 @@ import tiktoken
 # Load the cl100k_base tokenizer which is designed to work with the ada-002 model
 tokenizer = tiktoken.get_encoding("cl100k_base")
 
-df = pd.read_csv('logs.csv', index_col=0)
+df = pd.read_csv('data/logs.csv', index_col=0)
 df.columns = ['title', 'text']
 
 # Tokenize the text and save the number of tokens to a new column
@@ -73,6 +73,5 @@ client = OpenAI(
 
 df['embeddings'] = df.text.apply(lambda x: client.embeddings.create(input=x, model='text-embedding-ada-002').data[0].embedding)
 
-df.to_csv('embeddings.csv')
+df.to_csv('data/embeddings.csv')
 df.head()
-

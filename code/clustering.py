@@ -5,11 +5,6 @@ import pandas as pd
 
 embeddings_df = pd.read_csv("embeddings.csv")
 
-embeddings_list = embeddings_df['embeddings'].tolist()
-
-for embedding in embeddings_list:
-  
-
 embeddings_df['embeddings'] = embeddings_df['embeddings'].apply(eval).apply(np.array)
 
 embeddings_list = embeddings_df['embeddings'].tolist()
