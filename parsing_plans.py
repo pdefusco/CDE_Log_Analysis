@@ -1,10 +1,3 @@
-def extractPhysicalPlan(sparkEventLogsClean):
-  """
-  Method to extract Spark Physical Plans from CDE Spark Event Logs
-  """
-  
-  pass
-
 file = "spark_logs_18401.txt"
 
 # Open the file and read the text
