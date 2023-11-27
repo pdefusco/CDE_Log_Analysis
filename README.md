@@ -1,5 +1,7 @@
 # CDE Log Analysis with Gen AI
 
+![alt text](img/ref_arch.png)
+
 ## Objective
 
 In this project we analyze CDE logs at scale with the help of Gen AI. At a high level we:
@@ -32,10 +34,6 @@ The following are required in order to reproduce this project:
 * A Cloudera Machine Learning Workspace on version 2.0.41 or above.
 * Private or Public Cloud - OCP, ECS, AWS, Azure OK.
 * Basic familiarity with Python, Spark and Spark Event Logs, NLP, Deep Learning and Vector Databases are recommended.
-
-## Reference Architecture
-
-![alt text](img/ref_arch.png)
 
 ## Conclusions and Next Steps
 
